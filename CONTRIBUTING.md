@@ -55,4 +55,4 @@ npm run type-check
 
 ## Seguridad
 
-Si encuentras una vulnerabilidad de seguridad, por favor sigue nuestra [Política de Seguridad](security.md).
+Este es un proyecto de portafolio para demostración de habilidades técnicas.
