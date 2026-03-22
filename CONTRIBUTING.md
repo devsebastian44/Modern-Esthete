@@ -1,58 +1,58 @@
-# Contributing to Modern Esthete
+# Contribuir a Modern Esthete
 
-Thank you for your interest in contributing! This document provides guidelines for contributors.
+¡Gracias por tu interés en contribuir! Este documento proporciona guías para los contribuidores.
 
-## Getting Started
+## Primeros Pasos
 
-1. Fork the repository
-2. Clone your fork: `git clone https://github.com/yourusername/modern-esthete.git`
-3. Install dependencies: `npm install`
-4. Create a feature branch: `git checkout -b feature/amazing-feature`
+1. Fork del repositorio
+2. Clona tu fork: `git clone https://github.com/tuusuario/modern-esthete.git`
+3. Instala dependencias: `npm install`
+4. Crea una rama de feature: `git checkout -b feature/caracteristica-increible`
 
-## Development Setup
+## Configuración de Desarrollo
 
 ```bash
-# Install dependencies
+# Instalar dependencias
 npm install
 
-# Set up environment variables
+# Configurar variables de entorno
 cp .env.example .env.local
 
-# Run database migrations
+# Ejecutar migraciones de base de datos
 npx prisma migrate dev
 
-# Start development server
+# Iniciar servidor de desarrollo
 npm run dev
 ```
 
-## Code Style
+## Estilo de Código
 
-- Use TypeScript for all new code
-- Follow ESLint configuration
-- Use Prettier for formatting
-- Write meaningful commit messages
-- Add tests for new features
+- Usa TypeScript para todo el código nuevo
+- Sigue la configuración de ESLint
+- Usa Prettier para formateo
+- Escribe mensajes de commit significativos
+- Agrega pruebas para nuevas características
 
-## Pull Request Process
+## Proceso de Pull Request
 
-1. Update the README.md with details of changes if applicable
-2. Ensure your PR description clearly describes the problem and solution
-3. Link any relevant issues
-4. Wait for code review
+1. Actualiza el README.md con detalles de los cambios si aplica
+2. Asegúrate de que la descripción de tu PR describa claramente el problema y la solución
+3. Enlaza cualquier issue relevante
+4. Espera la revisión del código
 
-## Testing
+## Pruebas
 
 ```bash
-# Run tests
+# Ejecutar pruebas
 npm test
 
-# Run linting
+# Ejecutar linting
 npm run lint
 
-# Type checking
+# Verificación de tipos
 npm run type-check
 ```
 
-## Security
+## Seguridad
 
-If you find a security vulnerability, please follow our [Security Policy](security.md).
+Si encuentras una vulnerabilidad de seguridad, por favor sigue nuestra [Política de Seguridad](security.md).

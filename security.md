@@ -1,35 +1,35 @@
-# Security Policy
+# Política de Seguridad
 
-## Supported Versions
+## Versiones Soportadas
 
-| Version | Supported          |
+| Versión | Soportada          |
 |---------|--------------------|
 | 0.1.x   | :white_check_mark: |
 
-## Reporting a Vulnerability
+## Reportar una Vulnerabilidad
 
-If you discover a security vulnerability, please report it privately before disclosing it publicly.
+Si descubres una vulnerabilidad de seguridad, por favor repórtala de forma privada antes de divulgarla públicamente.
 
-### How to Report
+### Cómo Reportar
 
 1. **Email**: security@modern-esthete.com
-2. **Private Issue**: Create a private GitHub issue
-3. **Include**: 
-   - Steps to reproduce
-   - Potential impact
-   - Any relevant logs or screenshots
+2. **Issue Privada**: Crea un issue privado en GitHub
+3. **Incluir**: 
+   - Pasos para reproducir
+   - Impacto potencial
+   - Cualquier log o captura de pantalla relevante
 
-### Response Time
+### Tiempo de Respuesta
 
-- **Critical**: Within 24 hours
-- **High**: Within 48 hours  
-- **Medium**: Within 72 hours
-- **Low**: Within 1 week
+- **Crítica**: Dentro de 24 horas
+- **Alta**: Dentro de 48 horas  
+- **Media**: Dentro de 72 horas
+- **Baja**: Dentro de 1 semana
 
-### Security Measures
+### Medidas de Seguridad
 
-- All dependencies are automatically scanned for vulnerabilities
-- Regular security audits are performed
-- Environment variables are never committed to version control
-- Database connections use SSL/TLS
-- Authentication follows OWASP best practices
+- Todas las dependencias son escaneadas automáticamente en busca de vulnerabilidades
+- Se realizan auditorías de seguridad regulares
+- Las variables de entorno nunca se comprometen en el control de versiones
+- Las conexiones a la base de datos usan SSL/TLS
+- La autenticación sigue las mejores prácticas de OWASP
