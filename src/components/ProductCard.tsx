@@ -37,7 +37,7 @@ export default function ProductCard(props: ProductCardProps) {
                                 addToCart({
                                     id: props.id,
                                     name: props.name,
-                                    price: typeof props.price === 'string' ? parseFloat(props.price.replace('$', '')) : props.price,
+                                    price: typeof props.price === 'string' ? parseFloat(props.price.replace(/\$/g, '')) : props.price,
                                     image: props.image,
                                     category: props.category
                                 });
