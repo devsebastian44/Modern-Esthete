@@ -42,8 +42,10 @@ testing:
 security_scan:
   stage: security
   image: returntocorp/semgrep
+  variables:
+    SEMGREP_RULES: auto
   script:
-    - semgrep scan --config auto
+    - semgrep ci
   allow_failure: true
 
 build_app:
