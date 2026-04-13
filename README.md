@@ -1,128 +1,216 @@
-# 👒 MODERN_ESTHETE - Professional Backend Systems
+# Modern Esthete
 
-<p align="center">
-  <img src="Logo.png">
-</p>
+![Next.js](https://img.shields.io/badge/Next.js-16-black?style=flat&logo=next.js)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=flat&logo=typescript)
+![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-4.x-38B2AC?style=flat&logo=tailwind-css)
+![Prisma](https://img.shields.io/badge/Prisma-6-2D3748?style=flat&logo=prisma)
+![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL-3ECF8E?style=flat&logo=supabase)
+![Docker](https://img.shields.io/badge/Docker-Containerized-2496ED?style=flat&logo=docker)
 
 ---
 
-## 🎯 Technical Objective & Professional Approach
+## 🧠 Overview
 
-Modern Esthete is a production-grade Web Application and Backend API ecosystem. This project is engineered with a strict **DevSecOps mindset**, emphasizing a clear separation between a fully featured private laboratory (GitLab) and a sanitized public portfolio presentation (GitHub). This ensures ethical distribution of code, protection of intellectual property, and safe demonstration of architectural capabilities.
+Modern Esthete es una aplicación web full-stack de comercio electrónico construida con Next.js 16 y el App Router. El proyecto implementa un ecosistema completo de tienda en línea con autenticación segura de usuarios, gestión de sesiones y persistencia de datos mediante una base de datos PostgreSQL administrada a través de Prisma ORM y Supabase como proveedor cloud.
 
-## 🗂️ DevSecOps Architecture Flow
+Este proyecto sigue una arquitectura de tipo serverless/edge: la lógica del servidor se ejecuta directamente a través de Server Actions y API Routes de Next.js, sin necesidad de un backend desacoplado independiente. El stack es completamente tipado en TypeScript y orientado a producción, con soporte para containerización mediante Docker.
 
-We use a dual-repository architecture enforced by automation:
+---
 
-- **GitLab (Private Lab):** The absolute Source of Truth. Contains CI/CD pipelines (`.gitlab-ci.yml`), raw testing infrastructure (`tests/`), backend configuration specifics (`configs/`), and advanced automation scripts.
-- **GitHub (Public Portfolio):** A sanitized showcase of the code. All sensitive infrastructure and test data are stripped automatically to maintain security while still presenting a clean, readable frontend and core architecture.
+## ⚙️ Features
 
-### Repository Structure
-- `src/`: Core Next.js Application and API logic.
-- `docs/`: Contribution guidelines and general documentation.
-- `diagrams/`: Architectural schemas and models.
-- `configs/database/`: Database policies and configurations.
-- `scripts/`: DevSecOps automation, including the sanitization logic.
-- `tests/`: Automated unit and end-to-end tests (GitLab only).
+- **Autenticación de usuarios** mediante Auth.js v5 (NextAuth Beta), con manejo seguro de sesiones y middleware de protección de rutas.
+- **Gestión de contraseñas** con hash seguro usando `bcryptjs`.
+- **Validación de datos** estricta en todas las entradas mediante esquemas `Zod`.
+- **ORM tipado** con Prisma v6 para interacciones seguras y declarativas con la base de datos PostgreSQL.
+- **Integración con Supabase** para lógica de base de datos en la nube con Row Level Security (RLS).
+- **Interfaz de usuario moderna** construida con componentes React 19 y `lucide-react` como librería de iconografía.
+- **Estilizado responsivo** con Tailwind CSS 4.x mediante PostCSS.
+- **Soporte de contenedores** con Dockerfile multi-stage optimizado y `docker-compose.yml` para entorno local completo.
+- **Pipeline de publicación automatizado** con script PowerShell para sincronización entre repositorios privado/público.
+- **Testing** configurado con Vitest para pruebas unitarias (pipeline completo disponible en GitLab).
 
 ---
 
 ## 🛠️ Tech Stack
 
-![Next.js](https://img.shields.io/badge/Next.js-16-black?style=for-the-badge&logo=next.js)
-![Supabase](https://img.shields.io/badge/Supabase-Database-3ECF8E?style=for-the-badge&logo=supabase)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.x-38B2AC?style=for-the-badge&logo=tailwind-css)
-![Prisma](https://img.shields.io/badge/Prisma-ORM-2D3748?style=for-the-badge&logo=prisma)
-![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=for-the-badge&logo=typescript)
-
-- **Framework**: `Next.js 16` (App Router, Server Actions, Middleware).
-- **Styling**: `Tailwind CSS 4.x` with modern design patterns.
-- **ORM & DB**: `Prisma v6` + `Supabase` (PostgreSQL) with RLS security.
-- **Auth**: `Auth.js v5` (NextAuth Beta) for secure session handling.
-- **Validation**: `Zod` for schema-based data integrity.
+| Capa | Tecnología |
+|------|-----------|
+| Framework | Next.js 16 (App Router, Server Actions, Middleware) |
+| Lenguaje | TypeScript 5 |
+| UI | React 19 + lucide-react |
+| Estilos | Tailwind CSS 4.x + PostCSS |
+| ORM | Prisma v6 |
+| Base de Datos | PostgreSQL 15 (Supabase / Docker local) |
+| Autenticación | Auth.js v5 (NextAuth Beta) |
+| Validación | Zod v4 |
+| Seguridad de contraseñas | bcryptjs |
+| Contenerización | Docker + Docker Compose |
+| Testing | Vitest |
+| Linting / Formato | ESLint 9 + Prettier |
+| Runtime Node | Node.js 20 (LTS) — fijado en `.nvmrc` |
 
 ---
 
-## 🏗️ Backend System Architecture
+## 📦 Installation
 
-The infrastructure uses serverless functions natively via Next.js coupled with robust Edge database routing.
+### Prerrequisitos
 
-```mermaid
-graph TD
-    %% Global Styles
-    classDef client fill:#e1f5fe,stroke:#01579b,stroke-width:2px;
-    classDef server fill:#fff3e0,stroke:#e65100,stroke-width:2px;
-    classDef security fill:#f3e5f5,stroke:#4a148c,stroke-width:2px;
-    classDef database fill:#e8f5e9,stroke:#1b5e20,stroke-width:2px;
+- Node.js `>=20` (recomendado con `nvm`)
+- npm `>=10`
+- Docker y Docker Compose (opcional para entorno local containerizado)
+- Cuenta en [Supabase](https://supabase.com) o instancia PostgreSQL local
 
-    subgraph Client ["🌐 Client Interface (Frontend)"]
-        UI["React Components"]
-        State["Cart State (Context)"]
-        Logic["Client Validation"]
-    end
+### 1. Clonar el repositorio
 
-    subgraph Server ["⚡ Infrastructure (Backend)"]
-        Routes["App Router / SSR"]
-        API["API Endpoints"]
-        Auth["Auth.js Middleware"]
-        Prisma["Prisma ORM Engine"]
-    end
+```bash
+git clone https://github.com/devsebastian44/Modern-Esthete.git
+cd Modern-Esthete
+```
 
-    subgraph Data ["💾 Persistence Layer"]
-        Postgres[(PostgreSQL Database)]
-        Supabase["Supabase Logic / RLS"]
-    end
+### 2. Instalar dependencias
 
-    %% Connections
-    UI --> State
-    State --> Logic
-    Logic --> API
-    UI --> Routes
-    Routes --> API
-    API --> Auth
-    API --> Prisma
-    Auth --> Prisma
-    Prisma --> Postgres
-    Supabase --> Postgres
+```bash
+nvm use        # Usa la versión de Node definida en .nvmrc
+npm install
+```
 
-    %% Assign Classes
-    class UI,State,Logic client;
-    class Routes,API server;
-    class Auth security;
-    class Prisma,Postgres,Supabase database;
+### 3. Configurar variables de entorno
+
+Crea un archivo `.env.local` en la raíz del proyecto con las siguientes variables:
+
+```env
+DATABASE_URL="postgresql://usuario:password@host:5432/modern_esthete"
+DIRECT_URL="postgresql://usuario:password@host:5432/modern_esthete"
+
+NEXTAUTH_SECRET="tu_secreto_seguro"
+NEXTAUTH_URL="http://localhost:3000"
+
+NEXT_PUBLIC_SUPABASE_URL="https://tu-proyecto.supabase.co"
+NEXT_PUBLIC_SUPABASE_ANON_KEY="tu_anon_key"
+```
+
+### 4. Inicializar la base de datos
+
+```bash
+npx prisma generate
+npx prisma db push
 ```
 
 ---
 
-## 🛡️ Security Model & CI/CD Pipeline
+## ▶️ Usage
 
-- **Row Level Security (RLS)**: Core data bounded at the database layer (Supabase).
-- **Zod Validation**: Strict validation for all incoming RPCs requests.
-- **GitLab CI/CD**: Enforces Linting, Unit testing, and Semgrep SAST scanning on all internal pull requests.
+### Modo desarrollo
 
-## 🚀 The `publish_public.ps1` Pipeline
+```bash
+npm run dev
+```
 
-Located in `scripts/publish_public.ps1`, this PowerShell automation is the backbone of our dual-repo strategy.
+Accede a la aplicación en `http://localhost:3000`.
 
-**How it works:**
-1. Validates a clean local state on the `main` branch.
-2. Synchronizes fully with the GitLab private laboratory.
-3. Generates a temporary `public` branch in isolation.
-4. Purges all tests, CI configurations, infrastructure setup, and sensitive dotfiles using `git rm --cached`.
-5. Pushes the sanitized snapshot forcefully to the GitHub repository as a portfolio representation.
-6. Returns developers to their original context without data loss.
+### Build de producción
 
-> [!WARNING]
-> Do NOT execute the publishing script if you are not authorized to deploy to the public origin.
+```bash
+npm run build
+npm run start
+```
+
+### Con Docker (entorno completo local)
+
+```bash
+docker-compose up --build
+```
+
+Esto levanta dos servicios:
+- `app`: la aplicación Next.js en el puerto `3000`
+- `postgres`: base de datos PostgreSQL 15 en el puerto `5432`
 
 ---
 
-## 🤝 Contributing
+## 📁 Project Structure
 
-Developed with ❤️ for the Tech Community. For internal team members, please refer to `/docs/CONTRIBUTING.md`.
+```
+Modern-Esthete/
+├── src/                        # Código fuente principal
+│   └── app/                    # App Router de Next.js (páginas, layouts, API routes)
+├── prisma/                     # Schema de base de datos y migraciones (Prisma)
+│   └── schema.prisma
+├── public/                     # Assets estáticos servidos directamente
+├── diagrams/                   # Diagramas arquitectónicos del sistema
+├── docs/                       # Documentación interna (guías de contribución)
+├── Dockerfile                  # Imagen Docker multi-stage optimizada para producción
+├── docker-compose.yml          # Orquestación local: app + PostgreSQL
+├── next.config.ts              # Configuración del framework Next.js
+├── tsconfig.json               # Configuración de TypeScript
+├── eslint.config.mjs           # Reglas de linting
+├── prettier.config.js          # Formato de código
+├── postcss.config.mjs          # Procesador CSS para Tailwind
+├── .nvmrc                      # Versión de Node.js fijada (v20)
+├── publish_public.ps1          # Script DevSecOps de sincronización GitHub ↔ GitLab
+└── package.json                # Dependencias y scripts npm
+```
 
 ---
 
-## 📜 Licencia
+## 🔐 Security
 
-Este proyecto está bajo la licencia MIT. Puedes usarlo libremente, siempre citando al autor.
+Este proyecto incorpora múltiples capas de seguridad a nivel de aplicación, base de datos e infraestructura:
+
+- **Row Level Security (RLS)** en Supabase: las políticas de acceso están definidas directamente en la base de datos PostgreSQL, garantizando que cada usuario solo acceda a sus propios datos incluso si hay vulnerabilidades en la capa de aplicación.
+- **Validación estricta de entradas** con Zod en todas las Server Actions y endpoints API, previniendo inyecciones y datos malformados.
+- **Hash de contraseñas** con `bcryptjs`, nunca almacenadas en texto plano.
+- **Middleware de autenticación** con Auth.js v5 protegiendo rutas sensibles a nivel de servidor.
+- **Docker hardening**: el servicio `postgres` en Docker Compose corre con `no-new-privileges:true`, sistema de archivos `read_only` y `tmpfs` para directorios temporales.
+- **Arquitectura dual de repositorios**: los archivos de configuración de infraestructura, scripts CI/CD, dotfiles sensibles y datos de prueba se mantienen exclusivamente en el repositorio privado de GitLab, distribuyéndose al público únicamente el código de presentación mediante el script `publish_public.ps1`.
+- **SAST con Semgrep** integrado en el pipeline GitLab CI/CD para análisis estático de seguridad en cada commit interno.
+
+> ⚠️ Para despliegues en producción, asegúrate de rotar el `NEXTAUTH_SECRET`, usar variables de entorno cifradas, y configurar correctamente las políticas RLS en Supabase antes de exponer la aplicación públicamente.
+
+---
+
+## 🌐 Repository Architecture
+
+Este proyecto sigue una arquitectura distribuida de repositorios con enfoque DevSecOps:
+
+- **GitHub**: Presentación pública y portafolio — contiene el código fuente principal sanitizado, documentación técnica y diagramas de arquitectura.
+- **GitLab**: Laboratorio de desarrollo completo — contiene la implementación íntegra con pipelines CI/CD, infraestructura de testing, configuraciones sensibles y scripts de automatización avanzados.
+
+### 🔗 Full Source Code
+
+👉 Código completo disponible en GitLab: [https://gitlab.com/group-programming-lab/Modern-Esthete](https://gitlab.com/group-programming-lab/Modern-Esthete)
+
+---
+
+## 🚀 Roadmap
+
+Basado en el análisis de la arquitectura actual del código, estas son las mejoras técnicas sugeridas:
+
+- [ ] Implementar paginación y filtros avanzados en el catálogo de productos
+- [ ] Integrar un proveedor de pagos (Stripe o similar) con webhooks seguros
+- [ ] Añadir caching con `unstable_cache` de Next.js o Redis para consultas frecuentes
+- [ ] Expandir cobertura de tests unitarios y E2E (Playwright) en el pipeline GitLab
+- [ ] Implementar sistema de roles (admin / cliente) a nivel de middleware y RLS
+- [ ] Añadir gestión de imágenes de productos con Supabase Storage
+- [ ] Configurar monitoreo de errores en producción (Sentry o similar)
+- [ ] Migrar a versión estable de Auth.js cuando salga de beta
+
+---
+
+## 📄 License
+
+Este proyecto está bajo la licencia **MIT**.
+
+> Licencia detectada directamente desde el archivo `LICENSE` en la raíz del repositorio.
+
+Puedes usar, copiar, modificar y distribuir este software libremente, siempre que se incluya el aviso de copyright original.
+
+---
+
+## 👨‍💻 Author
+
+**Sebastian** — [@devsebastian44](https://github.com/devsebastian44)
+
+Desarrollador full-stack con enfoque en aplicaciones web modernas, arquitecturas DevSecOps y buenas prácticas de ingeniería de software.
+
+🌐 Demo en producción: [modernesthete.vercel.app](https://modernesthete.vercel.app)
