@@ -5,7 +5,7 @@
 ![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-4.x-38B2AC?style=flat&logo=tailwind-css)
 ![Prisma](https://img.shields.io/badge/Prisma-6-2D3748?style=flat&logo=prisma)
 ![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL-3ECF8E?style=flat&logo=supabase)
-![Docker](https://img.shields.io/badge/Docker-Containerized-2496ED?style=flat&logo=docker)
+![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-CI%2FCD-2088FF?style=flat&logo=github-actions&logoColor=white)
 
 ---
 
@@ -27,8 +27,7 @@ Este proyecto sigue una arquitectura de tipo serverless/edge: la lógica del ser
 - **Interfaz de usuario moderna** construida con componentes React 19 y `lucide-react` como librería de iconografía.
 - **Estilizado responsivo** con Tailwind CSS 4.x mediante PostCSS.
 - **Soporte de contenedores** con Dockerfile multi-stage optimizado y `docker-compose.yml` para entorno local completo.
-- **Pipeline de publicación automatizado** con script PowerShell para sincronización entre repositorios privado/público.
-- **Testing** configurado con Vitest para pruebas unitarias (pipeline completo disponible en GitLab).
+- **Testing** configurado con Vitest para pruebas unitarias y E2E.
 
 ---
 
@@ -128,6 +127,32 @@ Esto levanta dos servicios:
 
 ---
 
+## 🧪 Testing
+
+Para ejecutar los tests funcionales de la aplicación:
+
+```bash
+npm run test
+```
+
+Los tests se ejecutan en un entorno seguro local o de CI, utilizando una base de datos mockeada mediante variables de entorno sintéticas, por lo que no requieren conexión a la base de datos de producción.
+
+---
+
+## 🤝 Contributing
+
+¡Las contribuciones son bienvenidas! Para colaborar:
+
+1. Haz un **Fork** del repositorio.
+2. Crea una rama para tu feature (`git checkout -b feature/nueva-caracteristica`).
+3. Haz **Commit** de tus cambios siguiendo [Conventional Commits](https://www.conventionalcommits.org/).
+4. Sube tu rama (`git push origin feature/nueva-caracteristica`).
+5. Abre un **Pull Request**.
+
+Asegúrate de que los tests y el linter pasen correctamente antes de enviar tu PR. El pipeline de CI/CD (GitHub Actions) validará tus cambios automáticamente.
+
+---
+
 ## 📁 Project Structure
 
 ```
@@ -147,7 +172,6 @@ Modern-Esthete/
 ├── prettier.config.js          # Formato de código
 ├── postcss.config.mjs          # Procesador CSS para Tailwind
 ├── .nvmrc                      # Versión de Node.js fijada (v20)
-├── publish_public.ps1          # Script DevSecOps de sincronización GitHub ↔ GitLab
 └── package.json                # Dependencias y scripts npm
 ```
 
@@ -162,23 +186,9 @@ Este proyecto incorpora múltiples capas de seguridad a nivel de aplicación, ba
 - **Hash de contraseñas** con `bcryptjs`, nunca almacenadas en texto plano.
 - **Middleware de autenticación** con Auth.js v5 protegiendo rutas sensibles a nivel de servidor.
 - **Docker hardening**: el servicio `postgres` en Docker Compose corre con `no-new-privileges:true`, sistema de archivos `read_only` y `tmpfs` para directorios temporales.
-- **Arquitectura dual de repositorios**: los archivos de configuración de infraestructura, scripts CI/CD, dotfiles sensibles y datos de prueba se mantienen exclusivamente en el repositorio privado de GitLab, distribuyéndose al público únicamente el código de presentación mediante el script `publish_public.ps1`.
-- **SAST con Semgrep** integrado en el pipeline GitLab CI/CD para análisis estático de seguridad en cada commit interno.
+- **SAST con Semgrep** para análisis estático de seguridad continuo.
 
 > ⚠️ Para despliegues en producción, asegúrate de rotar el `NEXTAUTH_SECRET`, usar variables de entorno cifradas, y configurar correctamente las políticas RLS en Supabase antes de exponer la aplicación públicamente.
-
----
-
-## 🌐 Repository Architecture
-
-Este proyecto sigue una arquitectura distribuida de repositorios con enfoque DevSecOps:
-
-- **GitHub**: Presentación pública y portafolio — contiene el código fuente principal sanitizado, documentación técnica y diagramas de arquitectura.
-- **GitLab**: Laboratorio de desarrollo completo — contiene la implementación íntegra con pipelines CI/CD, infraestructura de testing, configuraciones sensibles y scripts de automatización avanzados.
-
-### 🔗 Full Source Code
-
-👉 Código completo disponible en GitLab: [https://gitlab.com/group-programming-lab/Modern-Esthete](https://gitlab.com/group-programming-lab/Modern-Esthete)
 
 ---
 
@@ -189,7 +199,7 @@ Basado en el análisis de la arquitectura actual del código, estas son las mejo
 - [ ] Implementar paginación y filtros avanzados en el catálogo de productos
 - [ ] Integrar un proveedor de pagos (Stripe o similar) con webhooks seguros
 - [ ] Añadir caching con `unstable_cache` de Next.js o Redis para consultas frecuentes
-- [ ] Expandir cobertura de tests unitarios y E2E (Playwright) en el pipeline GitLab
+- [ ] Expandir cobertura de tests unitarios y E2E (Playwright)
 - [ ] Implementar sistema de roles (admin / cliente) a nivel de middleware y RLS
 - [ ] Añadir gestión de imágenes de productos con Supabase Storage
 - [ ] Configurar monitoreo de errores en producción (Sentry o similar)
